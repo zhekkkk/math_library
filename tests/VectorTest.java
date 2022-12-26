@@ -84,6 +84,7 @@ public class VectorTest {
             Vector v1 = new Vector2f(vectorFirst);
             v1.divideByScalar(v1, scalar);
         });
+        Assertions.assertEquals("zero division error", thrown.getMessage());
 
         float[] vectorValueFirst = new float[]{3.333f, 0.898f};
         Vector vector1 = new Vector2f(vectorValueFirst);
@@ -119,6 +120,26 @@ public class VectorTest {
 
         Vector result = Vector.normalize(vector3f);
         Vector expectedResult = new Vector3f(new float[]{(float)0.8, (float)0.6, 0});
+        Assertions.assertArrayEquals(result.getValues(), expectedResult.getValues());
+    }
+
+    @Test
+    public void testDotProduct() throws Vector.VectorException {
+        Vector3f vector3f1 = new Vector3f(new float[]{45, 23, -643});
+        Vector3f vector3f2 = new Vector3f(new float[]{0, 765, 44});
+
+        float result = Vector.dotProduct(vector3f1, vector3f2);
+        float expectedResult = -10697;
+        Assertions.assertEquals(result, expectedResult);
+    }
+
+    @Test
+    public void testCrossProduct() throws Vector.VectorException {
+        Vector3f vector3f1 = new Vector3f(new float[]{45, 23, -643});
+        Vector3f vector3f2 = new Vector3f(new float[]{0, 765, 44});
+
+        Vector result = Vector3f.crossProduct(vector3f1, vector3f2);
+        Vector expectedResult = new Vector3f(new float[]{492907, -1980, 34425});;
         Assertions.assertArrayEquals(result.getValues(), expectedResult.getValues());
     }
 }

@@ -40,16 +40,26 @@ public class Matrix3f extends SquareMatrix {
     }
 
     @Override
-    public Vector multiplyByVector(SquareMatrix mat, Vector vec) throws MatrixException {
+    public void setZeroMatrix() {
+        super.size = 3;
+        super.values = new float[]{0,0,0,0,0,0,0,0,0};
+    }
+
+    @Override
+    public void setIdentityMatrix() {
+        super.size = 3;
+        super.values = new float[]{1,0,0,0,1,0,0,0,1};
+    }
+
+    public static Vector multiplyByVector(SquareMatrix mat, Vector vec) throws MatrixException {
         Vector3f result = new Vector3f(0,0,0);
         if(vec.size == 3) {
             float[][] matrix = getSquareMatrix(mat);
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < size; j++) {
+            for (int i = 0; i < mat.size; i++) {
+                for (int j = 0; j < mat.size; j++) {
                     result.values[j] = matrix[i][j] + vec.values[j];
                 }
             }
-
         } else {
             throw new MatrixException("vector and matrix have different sizes");
         }

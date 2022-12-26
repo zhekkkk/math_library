@@ -48,7 +48,7 @@ public abstract class Vector {
     public static Vector divideByScalar(Vector vec, float v) throws VectorException {
         if(Math.abs(v) > eps) {
             for (int i = 0; i < vec.size; i++) {
-                vec.values[i] *= v;
+                vec.values[i] /= v;
             }
         } else {
             throw new VectorException("zero division error");
@@ -73,19 +73,29 @@ public abstract class Vector {
     }
 
     public static float dotProduct(Vector vec, Vector other) throws VectorException {
-        double cos = 0;
+        /*double cos = 0;
         double sum = 0;
         double prod = 1;
         if(vec.size == other.size) {
             for (int i = 0; i < vec.size; i++) {
                 sum += vec.values[i] + other.values[i];
-                prod *= Math.pow(vec.values[i] * other.values[i], 2);
+                //prod *= Math.pow(vec.values[i] * other.values[i], 2);
             }
             cos = sum / Math.sqrt(prod);
         } else {
             throw new VectorException("vectors of different sizes");
         }
-        return length(vec) * length(other) * (float) cos;
+        return length(vec) * length(other) * (float) cos;*/
+        float scalar = 0;
+        if(vec.size == other.size) {
+            for (int i = 0; i < vec.size; i++) {
+                scalar += vec.values[i] * other.values[i];
+            }
+        } else {
+            throw new VectorException("vectors of different sizes");
+        }
+        return scalar;
+
     }
 
     public static Vector zero(Vector vec) {

@@ -6,7 +6,9 @@ public abstract class SquareMatrix {
 
     int size;
 
-    public abstract Vector multiplyByVector(SquareMatrix mat, Vector vec) throws MatrixException;
+    public abstract void setZeroMatrix();
+
+    public abstract void setIdentityMatrix();
 
     public static class MatrixException extends Exception {
 
@@ -97,5 +99,13 @@ public abstract class SquareMatrix {
             }
         }
         return result;
+    }
+
+    public float[] getValues() {
+        return values;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
